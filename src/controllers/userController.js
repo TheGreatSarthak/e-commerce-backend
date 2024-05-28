@@ -1,4 +1,7 @@
-const userService = require("../services/userServices");
+import {
+  getUserProfileByToken,
+  getAllUsers as _getAllUsers,
+} from "../services/userServices";
 
 const getUserProfile = async (req, res) => {
   try {
@@ -6,7 +9,7 @@ const getUserProfile = async (req, res) => {
     if (!jwt) {
       return res.status(404).send({ error: "Token not found!" });
     }
-    const user = await userService.getUserProfileByToken(jwt);
+    const user = await getUserProfileByToken(jwt);
     return res.status(200).send(user);
   } catch (error) {
     return res.status(500).send({ error: error.message });
@@ -15,11 +18,11 @@ const getUserProfile = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await userService.getAllUsers();
+    const users = await _getAllUsers();
     return res.status(200).send(users);
   } catch (error) {
     return res.status(500).send({ error: error.message });
   }
 };
 
-module.exports = { getUserProfile, getAllUsers };
+export default { getUserProfile, getAllUsers };

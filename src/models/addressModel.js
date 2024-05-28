@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const addressSchema = new mongoose.Schema({
+const addressSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -26,7 +26,7 @@ const addressSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    type: mongoose.Schema.ObjectId,
+    type: Schema.ObjectId,
     ref: "users",
   },
   mobile: {
@@ -35,5 +35,5 @@ const addressSchema = new mongoose.Schema({
   },
 });
 
-const Address = mongoose.model("addresses", addressSchema);
-module.exports = Address;
+const Address = model("addresses", addressSchema);
+export default Address;

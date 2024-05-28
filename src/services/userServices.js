@@ -1,6 +1,6 @@
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
-const jwtProvider = require("../config/jwtProvider");
+import User from "../models/userModel";
+import { hash } from "bcrypt";
+import { getUserIdFromToken } from "../config/jwtProvider";
 
 const createUser = async (userData) => {
   try {
@@ -11,7 +11,7 @@ const createUser = async (userData) => {
       throw new Error("User already exists with email : ", email);
     }
 
-    password = await bcrypt.hash(password, 8);
+    password = await hash(password, 8);
 
     const user = await User.create({ firstName, lastName, email, password });
     console.log("created user ", user);
@@ -47,7 +47,7 @@ const getUserByEmail = async (email) => {
 
 const getUserProfileByToken = async (token) => {
   try {
-    const userId = jwtProvider.getUserIdFromToken(token);
+    const userId = getUserIdFromToken(token);
 
     const user = await findUserById(userId);
     if (!user) {
@@ -68,7 +68,7 @@ const getAllUsers = async () => {
   }
 };
 
-module.exports = {
+export default {
   createUser,
   findUserById,
   getUserByEmail,

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -27,25 +27,25 @@ const userSchema = new mongoose.Schema({
   },
   address: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "addresses",
     },
   ],
   paymentInfo: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "paymentInformation",
     },
   ],
   ratings: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "ratings",
     },
   ],
   reviews: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "reviews",
     },
   ],
@@ -55,5 +55,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const User = mongoose.model("users", userSchema);
-module.exports = User;
+const User = model("users", userSchema);
+export default User;

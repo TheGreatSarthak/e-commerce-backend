@@ -1,14 +1,14 @@
-const express = require("express");
-const cors = require("cors");
+import express, { json } from "express";
+import cors from "cors";
 
 const app = express();
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
-const authRouters = require("./routes/authRoute");
+import authRouters from "./routes/authRoute";
 app.use("/auth", authRouters);
 
-const userRouters = require("./routes/userRoute");
+import userRouters from "./routes/userRoute";
 app.use("/users", userRouters);
 
 app.get("/", (req, res) => {
@@ -17,4 +17,4 @@ app.get("/", (req, res) => {
     .send({ message: "welcome to ecommerce api", status: true });
 });
 
-module.exports = app;
+export default app;

@@ -1,8 +1,8 @@
-const app = require(".");
-const { connectDB } = require("./config/db");
+import { listen } from ".";
+import { connectDB } from "./config/db";
 
 const PORT = 5454;
-app.listen(PORT, async () => {
+listen(PORT, async () => {
   await connectDB();
   console.log("ecommerce api listening on PORT : ", PORT);
 });
