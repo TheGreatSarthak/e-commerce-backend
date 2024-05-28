@@ -5,11 +5,11 @@ const app = express();
 app.use(json());
 app.use(cors());
 
-import authRouters from "./routes/authRoute";
+import authRouters from "./routes/authRoute.js";
 app.use("/auth", authRouters);
 
-import userRouters from "./routes/userRoute";
-app.use("/users", userRouters);
+import userRouters from "./routes/userRoute.js";
+app.use("/api/users", userRouters);
 
 app.get("/", (req, res) => {
   return res

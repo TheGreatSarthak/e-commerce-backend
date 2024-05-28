@@ -1,7 +1,8 @@
-import { createUser, getUserByEmail } from "../services/userServices";
-import { generateToken } from "../config/jwtProvider";
+import { createUser } from "../services/userServices.js";
+import { getUserByEmail } from "../services/userServices.js";
+import { generateToken } from "../config/jwtProvider.js";
 import { compare } from "bcrypt";
-import { createCart } from "../services/cartService";
+import createCart from "../services/cartService.js";
 
 const register = async (req, res) => {
   try {

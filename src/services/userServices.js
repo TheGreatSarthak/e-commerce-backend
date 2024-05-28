@@ -1,6 +1,6 @@
-import User from "../models/userModel";
+import User from "../models/userModel.js";
 import { hash } from "bcrypt";
-import { getUserIdFromToken } from "../config/jwtProvider";
+import { getUserIdFromToken } from "../config/jwtProvider.js";
 
 const createUser = async (userData) => {
   try {
@@ -8,7 +8,7 @@ const createUser = async (userData) => {
 
     const isUserExist = await User.findOne({ email });
     if (isUserExist) {
-      throw new Error("User already exists with email : ", email);
+      throw new Error(`User already exists with email : ${email}`);
     }
 
     password = await hash(password, 8);
@@ -23,7 +23,8 @@ const createUser = async (userData) => {
 
 const findUserById = async (userId) => {
   try {
-    const user = await User.findById(userId).populate("address");
+    const user = await User.findById(userId);
+    //.populate("address");
     if (!user) {
       throw new Error("User not found with id : ", userId);
     }
@@ -35,7 +36,7 @@ const findUserById = async (userId) => {
 
 const getUserByEmail = async (email) => {
   try {
-    const user = await User.findOne(email);
+    const user = await User.findOne({ email: email });
     if (!user) {
       throw new Error("User not found with email : ", email);
     }
@@ -68,7 +69,7 @@ const getAllUsers = async () => {
   }
 };
 
-export default {
+export {
   createUser,
   findUserById,
   getUserByEmail,

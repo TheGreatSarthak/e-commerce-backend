@@ -1,7 +1,7 @@
 import {
   getUserProfileByToken,
   getAllUsers as _getAllUsers,
-} from "../services/userServices";
+} from "../services/userServices.js";
 
 const getUserProfile = async (req, res) => {
   try {

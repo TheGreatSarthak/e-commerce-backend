@@ -1,8 +1,8 @@
-import { listen } from ".";
-import { connectDB } from "./config/db";
+import app from "./index.js";
+import connectDB from "./config/db.js";
 
 const PORT = 5454;
-listen(PORT, async () => {
+app.listen(PORT, async () => {
   await connectDB();
   console.log("ecommerce api listening on PORT : ", PORT);
 });

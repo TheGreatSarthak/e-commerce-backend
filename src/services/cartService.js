@@ -1,4 +1,4 @@
-import Cart from "../models/cartModel";
+import Cart from "../models/cartModel.js";
 
 const createCart = async (user) => {
   try {
@@ -10,4 +10,4 @@ const createCart = async (user) => {
   }
 };
 
-export default { createCart };
+export default createCart;
