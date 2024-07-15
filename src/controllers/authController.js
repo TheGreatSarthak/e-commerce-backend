@@ -2,7 +2,7 @@ import { createUser } from "../services/userServices.js";
 import { getUserByEmail } from "../services/userServices.js";
 import { generateToken } from "../config/jwtProvider.js";
 import { compare } from "bcrypt";
-import createCart from "../services/cartService.js";
+import { createCart } from "../services/cartService.js";
 
 const register = async (req, res) => {
   try {
