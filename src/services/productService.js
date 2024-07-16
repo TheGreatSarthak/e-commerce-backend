@@ -75,3 +75,39 @@ const findProductById = async (id) => {
 
   return product;
 };
+
+const getAllProducts = async (reqQuery) => {
+  let {
+    category,
+    color,
+    sizes,
+    minPrice,
+    maxPrice,
+    minDiscount,
+    sort,
+    stock,
+    pageNumber,
+    pageSize,
+  } = reqQuery;
+
+  pageSize = pageSize || 10;
+  let query = Product.find().populate("category");
+
+  if (category) {
+    const existCategory = await Category.findOne({ name: category });
+    if (existCategory) {
+      query = query.where("category").equals(existCategory._id);
+    } else {
+      return { content: [], currentPage: 1, totalPages: 0 };
+    }
+  }
+  if (color) {
+    const colorSet = new Set(
+      color.split(",").map((color) => color.trim().toLowerCase())
+    );
+
+    const colorRegeX =
+      colorSet.size > 0 ? new RegExp([...colorSet].join("|"), "i") : null;
+    query = query.where("color").regex(colorRegeX);
+  }
+};
